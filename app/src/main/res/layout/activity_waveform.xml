@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#1E1E1E"
+    android:gravity="center">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="声纹小球动画"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 声纹小球 View -->
+    <com.voiceprintball.view.VoiceWaveView
+        android:id="@+id/waveform_view"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginBottom="48dp"
+        app:voicewave_ballColor="#FFFFFF"
+        app:voicewave_ballCount="3"
+        app:voicewave_animationSpeed="1.0"
+        app:voicewave_amplitudeSensitivity="1.25" />
+
+    <!-- 控制说明 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手动控制振幅："
+        android:textColor="#CCCCCC"
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- SeekBar 控制 -->
+    <SeekBar
+        android:id="@+id/seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:max="100"
+        android:progress="0" />
+
+    <!-- 按钮区域 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/btn_auto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="自动模拟"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_stop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="停止"
+            android:textAllCaps="false"
+            android:enabled="false" />
+
+    </LinearLayout>
+
+    <!-- 使用说明 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="使用说明：&#10;1. 拖动 SeekBar 手动控制振幅&#10;2. 点击「自动模拟」模拟语音输入&#10;3. 点击「停止」回到待机状态"
+        android:textColor="#999999"
+        android:textSize="14sp"
+        android:lineSpacingExtra="4dp"
+        android:gravity="center" />
+
+</LinearLayout>
+
+

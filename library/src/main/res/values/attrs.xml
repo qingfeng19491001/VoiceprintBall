@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="VoiceWaveView">
+        <!-- 小球颜色 -->
+        <attr name="voicewave_ballColor" format="color" />
+        
+        <!-- 小球数量（默认 3 个） -->
+        <attr name="voicewave_ballCount" format="integer" />
+        
+        <!-- 小球基础半径（单位：dp） -->
+        <attr name="voicewave_ballRadius" format="dimension" />
+        
+        <!-- 小球间距（单位：dp） -->
+        <attr name="voicewave_ballGap" format="dimension" />
+        
+        <!-- 最大跳跃高度（单位：dp） -->
+        <attr name="voicewave_maxJumpHeight" format="dimension" />
+        
+        <!-- 动画速度（时间因子，默认 1.0） -->
+        <attr name="voicewave_animationSpeed" format="float" />
+        
+        <!-- 声纹灵敏度（振幅缩放因子，默认 1.0） -->
+        <attr name="voicewave_amplitudeSensitivity" format="float" />
+        
+        <!-- 待机动画幅度（0-1，默认 0.16） -->
+        <attr name="voicewave_idleAmplitude" format="float" />
+        
+        <!-- 平滑系数（0-1，值越大变化越平滑，默认 0.85） -->
+        <attr name="voicewave_smoothFactor" format="float" />
+    </declare-styleable>
+</resources>
+
+
