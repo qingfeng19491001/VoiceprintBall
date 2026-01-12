@@ -1,10 +1,10 @@
 package com.voiceprintball.view
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.view.Choreographer
 import android.view.View
 import androidx.annotation.ColorInt
 import kotlin.math.sin
@@ -56,7 +56,7 @@ class VoiceWaveView @JvmOverloads constructor(
     private var idleAmplitude: Float = 0.16f
     private var smoothFactor: Float = 0.85f
 
-    private var frameCallback: Choreographer.FrameCallback? = null
+    private var animator: ValueAnimator? = null
 
     private var amp01: Float = 0f
     private var t: Float = 0f
@@ -188,20 +188,40 @@ class VoiceWaveView @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        if (frameCallback == null) {
-            frameCallback = Choreographer.FrameCallback {
-                t += animationSpeed
-                smoothAmp = smoothAmp * smoothFactor + amp01 * (1f - smoothFactor)
-                invalidate()
-                frameCallback?.let { cb -> Choreographer.getInstance().postFrameCallback(cb) }
-            }
-        }
-        frameCallback?.let { Choreographer.getInstance().postFrameCallback(it) }
+        startAnimation()
     }
 
     override fun onDetachedFromWindow() {
-        frameCallback?.let { Choreographer.getInstance().removeFrameCallback(it) }
+        stopAnimation()
         super.onDetachedFromWindow()
+    }
+
+    private fun startAnimation() {
+        if (animator != null) return
+        
+        // 创建无限循环的 ValueAnimator
+        animator = ValueAnimator.ofFloat(0f, 1f).apply {
+            repeatCount = ValueAnimator.INFINITE
+            duration = Long.MAX_VALUE // 无限时长
+            
+            addUpdateListener { animation ->
+                // 更新动画时间
+                t += animationSpeed
+                
+                // 平滑插值：避免振幅突变
+                smoothAmp = smoothAmp * smoothFactor + amp01 * (1f - smoothFactor)
+                
+                // 触发重绘
+                invalidate()
+            }
+            
+            start()
+        }
+    }
+
+    private fun stopAnimation() {
+        animator?.cancel()
+        animator = null
     }
 
     override fun onDraw(canvas: Canvas) {
